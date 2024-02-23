@@ -1,6 +1,6 @@
 import './App.css';
 import {useState} from "react";
-
+import Paleta from './Paleta';
 
 function App() {
     const [pixels, setPixels] = useState(Array(64).fill('blue'))
@@ -9,9 +9,9 @@ function App() {
        'red', 'green', 'blue', 'brown', 'orange', 'purple', 'yellow', 'black', 'white' 
     ]  
     function paint(ev, index) {
-      if (ev.buttons == 0) return
-      if(pixels[index] == cor) return
-      const newPixels = [... pixels]
+      if (ev.buttons === 0) return
+      if(pixels[index] === cor) return
+      const newPixels = [...pixels]
       newPixels[index] = cor
       setPixels(newPixels)
       console.log('pintar'+index)
@@ -20,16 +20,7 @@ function App() {
   
     return (
     <div className="App">
-
-      <div className="paleta">
-        {cores.map((c, index) => (
-          <button
-            key={'cor'+index}
-            style={{backgroundColor: c, color: "cyan"}}
-            onClick={()=>{setCor(c)}}
-          >{c}</button>
-        ))}
-      </div>
+      <Paleta cores={cores} onChangeColor={setCor}/>
 
       <div className="canva">
         {pixels.map((pixel, index) => (
