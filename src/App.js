@@ -1,23 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
+
 
 function App() {
-  return (
+    const [pixels, setPixels] = useState(Array(64).fill('blue'))
+    const [cor, setCor] = useState('red')
+    const cores = [
+       'red', 'green', 'blue', 'brown', 'orange', 'purple', 'yellow', 'black', 'white' 
+    ]  
+    function paint(ev, index) {
+      if (ev.buttons == 0) return
+      if(pixels[index] == cor) return
+      const newPixels = [... pixels]
+      newPixels[index] = cor
+      setPixels(newPixels)
+      console.log('pintar'+index)
+      pixels[index] = 'green';
+    }
+  
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <div className="paleta">
+        {cores.map((c, index) => (
+          <button
+            key={'cor'+index}
+            style={{backgroundColor: c, color: "cyan"}}
+            onClick={()=>{setCor(c)}}
+          >{c}</button>
+        ))}
+      </div>
+
+      <div className="canva">
+        {pixels.map((pixel, index) => (
+          <div 
+            key={'pixel'+index} 
+            style={{backgroundColor: pixel}}
+            onMouseMove= {(ev) => {paint(ev, index)}}
+            ></div>
+        ))}
+      </div>
+    
     </div>
   );
 }
