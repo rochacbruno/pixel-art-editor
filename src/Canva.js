@@ -1,4 +1,4 @@
-function Canva({pixels, onMouseMove}) {
+function Canva({pixels, paint}) {
   return (
     
       <div className="canva">
@@ -6,7 +6,8 @@ function Canva({pixels, onMouseMove}) {
           <div 
             key={'pixel'+index} 
             style={{backgroundColor: pixel}}
-            onMouseMove= {(ev) => {onMouseMove(ev, index)}}
+            onMouseDown= {(ev) => {paint(ev, index)}}
+            onMouseMove= {(ev) => {paint(ev, index)}}
             ></div>
         ))}
       </div>

@@ -20,7 +20,7 @@ function App() {
     return (
     <div className="App">
       <Paleta cores={cores} onChangeColor={setCor}/>
-      <Canva pixels={pixels} onMouseMove={paint}/>
+      <Canva pixels={pixels} paint={paint}/>
     </div>
   );
 }
